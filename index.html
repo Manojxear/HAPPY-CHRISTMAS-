@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merry Christmas 🎄 | Special Wishes</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(145deg, #650b19, #b51f32, #710d20);
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 92%;
+  max-width: 440px;
+  margin: 25px auto;
+  padding: 22px;
+  background: #fffaf0;
+  color: #333;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px #36000a80;
+}
+
+h1 {
+  color: #ffdf8b;
+  font-size: 30px;
+}
+
+h2 {
+  color: #a31529;
+}
+
+p {
+  line-height: 1.6;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  margin: 9px 0 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  color: #751020;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #168348;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.secondary {
+  background: #a31529;
+}
+
+.step {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+#photoPreview {
+  display: none;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 4px solid #d9ad52;
+  margin: 12px auto;
+}
+
+.card {
+  background: linear-gradient(145deg, #075b35, #087d46);
+  color: white;
+  border: 5px solid #e8c66c;
+  border-radius: 18px;
+  padding: 20px 12px;
+  margin-top: 15px;
+}
+
+.card h2 {
+  color: #ffe49a;
+}
+
+.card img {
+  max-width: 190px;
+  max-height: 190px;
+  object-fit: cover;
+  border: 4px solid #ffe49a;
+  border-radius: 15px;
+  margin: 10px auto;
+}
+
+.card-message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#giftStep {
+  padding: 35px 15px;
+}
+
+.gift-title {
+  font-size: clamp(32px, 9vw, 48px);
+  color: #ffe49a;
+  text-shadow: 2px 3px 8px #260000;
+}
+
+.small {
+  color: #777;
+  font-size: 12px;
+}
+
+.footer {
+  color: #ffe5a8;
+  padding: 20px;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎄 MERRY CHRISTMAS 🎄</h1>
+  <p>మీ కోసం ఒక ప్రత్యేక క్రిస్మస్ సర్ప్రైజ్!</p>
+</header>
+
+<!-- STEP 1 -->
+<div class="container step active" id="step1">
+
+  <h2>🎁 క్రిస్మస్ శుభాకాంక్షలు</h2>
+
+  <p>మీ పేరు నమోదు చేసి మీ స్వంత క్రిస్మస్ గ్రీటింగ్ తయారు చేసుకోండి.</p>
+
+  <label for="userName">మీ పేరు</label>
+  <input
+    type="text"
+    id="userName"
+    placeholder="మీ పేరు నమోదు చేయండి"
+    maxlength="35"
+  >
+
+  <button onclick="goToStep2()">కొనసాగించండి 🎄</button>
+
+</div>
+
+
+<!-- STEP 2 -->
+<div class="container step" id="step2">
+
+  <h2>📸 మీ ఫోటో జోడించండి</h2>
+
+  <label for="userPhoto">మీ ఫోటోను ఎంచుకోండి</label>
+  <input
+    type="file"
+    id="userPhoto"
+    accept="image/*"
+  >
+
+  <img id="photoPreview" alt="మీ ఫోటో ప్రివ్యూ">
+
+  <label for="greetingMessage">మీ క్రిస్మస్ సందేశం</label>
+  <textarea id="greetingMessage">మీకు మరియు మీ కుటుంబ సభ్యులకు క్రిస్మస్ శుభాకాంక్షలు! 🎄</textarea>
+
+  <button onclick="createGreeting()">గ్రీటింగ్ తయారు చేయండి 🎁</button>
+
+  <button class="secondary" onclick="showStep(1)">వెనక్కి</button>
+
+</div>
+
+
+<!-- STEP 3 -->
+<div class="container step" id="step3">
+
+  <h2>🎄 మీ క్రిస్మస్ గ్రీటింగ్ సిద్ధమైంది!</h2>
+
+  <div class="card" id="greetingCard">
+
+    <h2>🎅 MERRY CHRISTMAS 🎅</h2>
+
+    <img id="cardPhoto" alt="Greeting photo" style="display:none">
+
+    <h3>Christmas Greetings From</h3>
+
+    <h2 id="cardName"></h2>
+
+    <p class="card-message" id="cardMessage"></p>
+
+    <h2>⭐ 🎁 🎄</h2>
+
+  </div>
+
+  <button onclick="downloadGreeting()">⬇️ గ్రీటింగ్ డౌన్‌లోడ్ చేయండి</button>
+
+  <button onclick="showStep(4)">కొనసాగించండి</button>
+
+  <button class="secondary" onclick="showStep(2)">మార్చండి</button>
+
+</div>
+
+
+<!-- STEP 4: SHARE -->
+<div class="container step" id="step4">
+
+  <h2>🎁 మీ చివరి సర్ప్రైజ్ కోసం!</h2>
+
+  <p>
+    ఈ క్రిస్మస్ వెబ్‌సైట్ లింక్‌ను మీ స్నేహితులు,
+    కుటుంబ సభ్యులతో పంచుకోండి.
+  </p>
+
+  <button onclick="shareWebsite()">
+    📲 క్రిస్మస్ వెబ్‌సైట్ షేర్ చేయండి
+  </button>
+
+  <p id="shareStatus" aria-live="polite"></p>
+
+  <button
+    id="revealButton"
+    style="display:none"
+    onclick="revealGift()"
+  >
+    🎁 నా గిఫ్ట్ చూపించండి
+  </button>
+
+  <p class="small">
+    షేరింగ్ పూర్తయిన తర్వాత తిరిగి వచ్చి గిఫ్ట్ బటన్ నొక్కండి.
+  </p>
+
+</div>
+
+
+<!-- FINAL GIFT -->
+<div class="container step" id="giftStep">
+
+  <div style="padding:20px 5px">
+
+    <h2>🎁 మీ కోసం ఒక ప్రత్యేక బహుమతి!</h2>
+
+    <h1 class="gift-title">HAPPY CHRISTMAS 🎄</h1>
+
+    <h2 style="color:#a31529">MERRY CHRISTMAS!</h2>
+
+    <p>
+      మీ జీవితంలో ఆనందం, ప్రేమ, శాంతి,
+      సంతోషం నిండాలని కోరుకుంటున్నాం.
+    </p>
+
+    <h1>🎅 ⭐ 🎁</h1>
+
+    <h2>Christmas Greetings From</h2>
+
+    <h2 id="finalName" style="color:#a31529"></h2>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  Made with ❤️ for Christmas
+</div>
+
+
+<script>
+let uploadedPhoto = null;
+
+function showStep(step) {
+  document.querySelectorAll(".step").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  document.getElementById("step" + step).classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function goToStep2() {
+  const name = document.getElementById("userName").value.trim();
+
+  if (!name) {
+    alert("దయచేసి మీ పేరు నమోదు చేయండి.");
+    return;
+  }
+
+  showStep(2);
+}
+
+
+// PHOTO UPLOAD AND PREVIEW
+document.getElementById("userPhoto").addEventListener("change", function(event) {
+  const file = event.target.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("దయచేసి ఒక ఫోటోను ఎంచుకోండి.");
+    this.value = "";
+    return;
+  }
+
+  if (file.size > 8 * 1024 * 1024) {
+    alert("దయచేసి 8 MB కంటే చిన్న ఫోటోను ఎంచుకోండి.");
+    this.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    uploadedPhoto = e.target.result;
+
+    const preview = document.getElementById("photoPreview");
+    preview.src = uploadedPhoto;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+
+// CREATE GREETING
+function createGreeting() {
+  const name = document.getElementById("userName").value.trim();
+  const message = document.getElementById("greetingMessage").value.trim();
+
+  if (!name) {
+    alert("దయచేసి మీ పేరు నమోదు చేయండి.");
+    showStep(1);
+    return;
+  }
+
+  if (!message) {
+    alert("దయచేసి మీ సందేశాన్ని నమోదు చేయండి.");
+    return;
+  }
+
+  document.getElementById("cardName").textContent = name;
+  document.getElementById("cardMessage").textContent = message;
+  document.getElementById("finalName").textContent = name;
+
+  const cardPhoto = document.getElementById("cardPhoto");
+
+  if (uploadedPhoto) {
+    cardPhoto.src = uploadedPhoto;
+    cardPhoto.style.display = "block";
+  } else {
+    cardPhoto.style.display = "none";
+  }
+
+  showStep(3);
+}
+
+
+// DOWNLOAD GREETING CARD
+async function downloadGreeting() {
+  const card = document.getElementById("greetingCard");
+
+  try {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = 900;
+    canvas.height = 1100;
+
+    ctx.fillStyle = "#075b35";
+    ctx.fillRect(0, 0, 900, 1100);
+
+    ctx.strokeStyle = "#e8c66c";
+    ctx.lineWidth = 15;
+    ctx.strokeRect(15, 15, 870, 1070);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#ffe49a";
+    ctx.font = "bold 55px Arial";
+    ctx.fillText("MERRY CHRISTMAS", 450, 110);
+
+    let y = 210;
+
+    if (uploadedPhoto) {
+      const img = new Image();
+      img.src = uploadedPhoto;
+
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+
+      const size = 350;
+      ctx.drawImage(img, 275, y, size, size);
+      y += 410;
+    }
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "40px Arial";
+    ctx.fillText("Christmas Greetings From", 450, y);
+
+    y += 75;
+
+    ctx.fillStyle = "#ffe49a";
+    ctx.font = "bold 52px Arial";
+    ctx.fillText(
+      document.getElementById("userName").value.trim(),
+      450,
+      y
+    );
+
+    y += 100;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "30px Arial";
+
+    const message = document.getElementById("greetingMessage").value;
+    const words = message.split(/\s+/);
+    let line = "";
+    let lines = [];
+
+    for (const word of words) {
+      const testLine = line ? line + " " + word : word;
+
+      if (ctx.measureText(testLine).width > 740 && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = testLine;
+      }
+    }
+
+    if (line) lines.push(line);
+
+    lines.slice(0, 5).forEach((text, index) => {
+      ctx.fillText(text, 450, y + index * 48);
+    });
+
+    ctx.fillStyle = "#ffe49a";
+    ctx.font = "55px Arial";
+    ctx.fillText("🎅 ⭐ 🎁", 450, 1000);
+
+    const link = document.createElement("a");
+    link.download = "Christmas-Greeting.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+  } catch (error) {
+    alert("గ్రీటింగ్ డౌన్‌లోడ్ కాలేదు. మళ్లీ ప్రయత్నించండి.");
+  }
+}
+
+
+// SHARE WEBSITE
+async function shareWebsite() {
+  const shareData = {
+    title: "Merry Christmas 🎄",
+    text: "నా క్రిస్మస్ శుభాకాంక్షలను చూడండి! 🎅🎁",
+    url: window.location.href
+  };
+
+  const status = document.getElementById("shareStatus");
+  const reveal = document.getElementById("revealButton");
+
+  reveal.style.display = "none";
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+
+      status.textContent =
+        "ధన్యవాదాలు! మీ గిఫ్ట్ చూడటానికి కింద బటన్ నొక్కండి.";
+
+      reveal.style.display = "block";
+
+    } catch (error) {
+      if (error.name === "AbortError") {
+        status.textContent =
+          "షేరింగ్ రద్దు చేయబడింది. మళ్లీ ప్రయత్నించవచ్చు.";
+      } else {
+        status.textContent =
+          "షేరింగ్ సాధ్యం కాలేదు. మళ్లీ ప్రయత్నించండి.";
+      }
+    }
+
+  } else {
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+
+      status.textContent =
+        "లింక్ కాపీ అయింది. దాన్ని WhatsAppలో షేర్ చేసిన తర్వాత కింద బటన్ నొక్కండి.";
+
+      reveal.style.display = "block";
+
+    } catch (error) {
+      status.textContent =
+        "లింక్ కాపీ కాలేదు. దయచేసి బ్రౌజర్ అనుమతులను తనిఖీ చేయండి.";
+    }
+  }
+}
+
+
+// REVEAL FINAL GIFT
+function revealGift() {
+  document.querySelectorAll(".step").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  document.getElementById("giftStep").classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+</script>
+
+</body>
+  </html>
+  
